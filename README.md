@@ -1,4 +1,4 @@
-# lambda-arm64-onnx
+# Lambda ARM64 ONNX Runtime Fix
 
 An `LD_PRELOAD` shim that fixes ONNX Runtime crashing on AWS Lambda ARM64 (Graviton) instances.
 
@@ -135,7 +135,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -206,7 +206,7 @@ Local Docker on macOS/Linux typically provides the sysfs files via the VM. Lambd
 ## Compatibility
 
 - **Architectures:** ARM64 / aarch64 (Graviton 2, Graviton 3, Graviton 4)
-- **ONNX Runtime:** All versions affected by the cpuinfo crash (1.x and 2.x as of writing)
+- **ONNX Runtime:** All 1.x versions affected by the cpuinfo crash (tested up to 1.25.0)
 - **OS:** Any Linux distribution with glibc (the shim uses `memfd_create`, `fmemopen`, and `dlsym`)
 - **Runtime:** Works with AWS Lambda, ECS, EKS, EC2, or any other ARM64 Linux environment where the sysfs files are absent
 
